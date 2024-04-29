@@ -14,7 +14,6 @@
 using namespace std;
 
 class SystemAdministrator {
-
 public:
     void addPatient(Patient patients[], int &numPatients);
     int searchPatient(Patient patients[], int numPatients, const string& name);

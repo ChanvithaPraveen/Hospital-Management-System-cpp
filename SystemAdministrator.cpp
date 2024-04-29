@@ -22,16 +22,16 @@ void SystemAdministrator::addPatient(Patient patients[], int &numPatients) {
     cin.ignore(); // Clear input buffer
     string name;
     getline(cin, name);
-    patients[numPatients].setName(name); // Set the name using the setter function
+    patients[numPatients].setName(name);
     cout << "Enter patient age: ";
     int age;
     cin >> age;
-    patients[numPatients].setAge(age); // Set the age using the setter function
+    patients[numPatients].setAge(age);
     cout << "Enter patient illness: ";
     cin.ignore(); // Clear input buffer
     string illness;
     getline(cin, illness);
-    patients[numPatients].setIllness(illness); // Set the illness using the setter function
+    patients[numPatients].setIllness(illness);
     numPatients++;
     cout << "Patient added successfully!" << endl;
 }
@@ -68,21 +68,21 @@ void SystemAdministrator::updatePatient(Patient patients[], int numPatients) {
     string newName;
     getline(cin, newName);
     if (!newName.empty()) {
-        patients[index].setName(newName); // Set the name using the setter function
+        patients[index].setName(newName);
     }
 
     cout << "Enter new age (enter -1 to keep unchanged): ";
     int newAge;
     cin >> newAge;
     if (newAge != -1) {
-        patients[index].setAge(newAge); // Set the age using the setter function
+        patients[index].setAge(newAge);
     }
-    cin.ignore(); // Clear input buffer
+    cin.ignore();
 
     cout << "Enter new illness (leave blank to keep unchanged): ";
     getline(cin, name);
     if (!name.empty()) {
-        patients[index].setIllness(name); // Set the illness using the setter function
+        patients[index].setIllness(name);
     }
 
     cout << "Patient updated successfully!" << endl;
@@ -142,10 +142,10 @@ void SystemAdministrator::addMedicine(Medicine medicines[], int &numMedicines) {
         return;
     }
     cout << "Enter medicine name: ";
-    cin.ignore(); // Clear input buffer
+    cin.ignore();
     string name;
     getline(cin, name);
-    medicines[numMedicines].setName(name); // Set the name using the setter function
+    medicines[numMedicines].setName(name);
     cout << "Enter medicine dosage: ";
     string dosageStr;
     getline(cin, dosageStr);
@@ -186,7 +186,7 @@ void SystemAdministrator::updateMedicine(Medicine medicines[], int numMedicines)
     string newName;
     getline(cin, newName);
     if (!newName.empty()) {
-        medicines[index].setName(newName); // Set the name using the setter function
+        medicines[index].setName(newName);
     }
 
     cout << "Enter new dosage (leave blank to keep unchanged): ";

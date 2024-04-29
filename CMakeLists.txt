@@ -9,4 +9,6 @@ add_executable(C___Assignment main.cpp
         SystemAdministrator.cpp
         SystemAdministrator.h
         Medicine.cpp
-        Patient.cpp)
+        Patient.cpp
+        System.cpp
+        System.h)

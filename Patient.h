@@ -10,7 +10,6 @@
 
 using namespace std;
 
-// Structure to store patient information
 struct Patient {
 private:
     string name;
