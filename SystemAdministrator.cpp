@@ -8,6 +8,7 @@
 
 #include "SystemAdministrator.h"
 #include "Medicine.h"
+#include "Patient.h"
 
 using namespace std;
 
@@ -19,12 +20,18 @@ void SystemAdministrator::addPatient(Patient patients[], int &numPatients) {
     }
     cout << "Enter patient name: ";
     cin.ignore(); // Clear input buffer
-    getline(cin, patients[numPatients].name);
+    string name;
+    getline(cin, name);
+    patients[numPatients].setName(name); // Set the name using the setter function
     cout << "Enter patient age: ";
-    cin >> patients[numPatients].age;
+    int age;
+    cin >> age;
+    patients[numPatients].setAge(age); // Set the age using the setter function
     cout << "Enter patient illness: ";
-    cin.ignore();
-    getline(cin, patients[numPatients].illness);
+    cin.ignore(); // Clear input buffer
+    string illness;
+    getline(cin, illness);
+    patients[numPatients].setIllness(illness); // Set the illness using the setter function
     numPatients++;
     cout << "Patient added successfully!" << endl;
 }
@@ -32,7 +39,7 @@ void SystemAdministrator::addPatient(Patient patients[], int &numPatients) {
 // Function to search for patient (pass by value)
 int SystemAdministrator::searchPatient(Patient patients[], int numPatients, const string& name) {
     for (int i = 0; i < numPatients; i++) {
-        if (patients[i].name == name) {
+        if (patients[i].getName() == name) {
             return i;
         }
     }
@@ -53,33 +60,34 @@ void SystemAdministrator::updatePatient(Patient patients[], int numPatients) {
     }
 
     cout << "Update patient details:\n";
-    cout << "  Name: " << patients[index].name << endl;
-    cout << "  Age: " << patients[index].age << endl;
-    cout << "  Illness: " << patients[index].illness << endl;
+    cout << "  Name: " << patients[index].getName() << endl;
+    cout << "  Age: " << patients[index].getAge() << endl;
+    cout << "  Illness: " << patients[index].getIllness() << endl;
 
     cout << "Enter new name (leave blank to keep unchanged): ";
-    cin.ignore();
-    getline(cin, name);
-    if (!name.empty()) {
-        patients[index].name = name;
+    string newName;
+    getline(cin, newName);
+    if (!newName.empty()) {
+        patients[index].setName(newName); // Set the name using the setter function
     }
 
     cout << "Enter new age (enter -1 to keep unchanged): ";
     int newAge;
     cin >> newAge;
     if (newAge != -1) {
-        patients[index].age = newAge;
+        patients[index].setAge(newAge); // Set the age using the setter function
     }
     cin.ignore(); // Clear input buffer
 
     cout << "Enter new illness (leave blank to keep unchanged): ";
     getline(cin, name);
     if (!name.empty()) {
-        patients[index].illness = name;
+        patients[index].setIllness(name); // Set the illness using the setter function
     }
 
     cout << "Patient updated successfully!" << endl;
 }
+
 
 // Function to delete patient (void function)
 void SystemAdministrator::deletePatient(Patient patients[], int &numPatients) {
@@ -106,7 +114,7 @@ void SystemAdministrator::deletePatient(Patient patients[], int &numPatients) {
 void SystemAdministrator::sortPatients(Patient patients[], int numPatients) {
     for (int i = 0; i < numPatients - 1; i++) {
         for (int j = i + 1; j < numPatients; j++) {
-            if (patients[i].name > patients[j].name) {
+            if (patients[i].getName() > patients[j].getName()) {
                 swap(patients[i], patients[j]);
             }
         }
@@ -121,9 +129,9 @@ void SystemAdministrator::displayPatients(Patient patients[], int numPatients) {
     }
     cout << "\nPatient List:\n";
     for (int i = 0; i < numPatients; i++) {
-        cout << "  Name: " << patients[i].name << endl;
-        cout << "  Age: " << patients[i].age << endl;
-        cout << "  Illness: " << patients[i].illness << endl << endl;
+        cout << "  Name: " << patients[i].getName() << endl;
+        cout << "  Age: " << patients[i].getAge() << endl;
+        cout << "  Illness: " << patients[i].getIllness() << endl << endl;
     }
 }
 

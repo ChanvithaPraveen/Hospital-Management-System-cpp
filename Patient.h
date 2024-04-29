@@ -12,9 +12,21 @@ using namespace std;
 
 // Structure to store patient information
 struct Patient {
+private:
     string name;
     int age;
     string illness;
+
+public:
+    Patient();
+    Patient(string name, int age, string illness);
+
+    string &getName();
+    void setName(string &name);
+    int getAge();
+    void setAge(int age);
+    string &getIllness();
+    void setIllness(string &illness);
 };
 
 #endif //C___ASSIGNMENT_PATIENT_H

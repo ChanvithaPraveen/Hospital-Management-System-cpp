@@ -14,7 +14,14 @@ void readData(Patient patients[], Medicine medicines[], int &numPatients, int &n
     if (file.is_open()) {
         file >> numPatients >> numMedicines;
         for (int i = 0; i < numPatients; i++) {
-            file >> patients[i].name >> patients[i].age >> patients[i].illness;
+            string name;
+            int age;
+            string illness;
+            file >> name >> age >> illness;
+            // Set the values using the setter functions of Patient
+            patients[i].setName(name);
+            patients[i].setAge(age);
+            patients[i].setIllness(illness);
         }
         for (int i = 0; i < numMedicines; i++) {
             string medicineName;
@@ -36,7 +43,7 @@ void writeData(Patient patients[], Medicine medicines[], int numPatients, int nu
     if (file.is_open()) {
         file << numPatients << " " << numMedicines << endl;
         for (int i = 0; i < numPatients; i++) {
-            file << patients[i].name << " " << patients[i].age << " " << patients[i].illness << endl;
+            file << patients[i].getName() << " " << patients[i].getAge() << " " << patients[i].getIllness() << endl;
         }
         for (int i = 0; i < numMedicines; i++) {
             file << medicines[i].getName() << " " << medicines[i].getDosage() << endl;
@@ -73,8 +80,9 @@ int getUserInput() {
 }
 
 int main() {
-    SystemAdministrator sysAd = SystemAdministrator();
-    Medicine medi = Medicine();
+    SystemAdministrator sysAdmin = SystemAdministrator();
+    Patient patient = Patient();
+    Medicine medicine = Medicine();
 
     const int MAX_PATIENTS = 100; // Adjust size limit as needed
     const int MAX_MEDICINES = 50; // Adjust size limit as needed
@@ -94,46 +102,46 @@ int main() {
 
         switch (choice) {
             case 1:
-                sysAd.addPatient(patients, numPatients);
+                sysAdmin.addPatient(patients, numPatients);
                 break;
             case 2: {
                 string name;
                 cout << "Enter patient name to search: ";
                 cin.ignore();
                 getline(cin, name);
-                int index = sysAd.searchPatient(patients, numPatients, name);
+                int index = sysAdmin.searchPatient(patients, numPatients, name);
                 if (index != -1) {
                     cout << "\nPatient Details:\n";
-                    cout << "  Name: " << patients[index].name << endl;
-                    cout << "  Age: " << patients[index].age << endl;
-                    cout << "  Illness: " << patients[index].illness << endl;
+                    cout << "  Name: " << patients[index].getName() << endl;
+                    cout << "  Age: " << patients[index].getAge() << endl;
+                    cout << "  Illness: " << patients[index].getIllness() << endl;
                 } else {
                     cout << "Patient not found!" << endl;
                 }
                 break;
             }
             case 3:
-                sysAd.updatePatient(patients, numPatients);
+                sysAdmin.updatePatient(patients, numPatients);
                 break;
             case 4:
-                sysAd.deletePatient(patients, numPatients);
+                sysAdmin.deletePatient(patients, numPatients);
                 break;
             case 5:
-                sysAd.sortPatients(patients, numPatients);
+                sysAdmin.sortPatients(patients, numPatients);
                 cout << "Patients sorted by name!" << endl;
                 break;
             case 6:
-                sysAd.displayPatients(patients, numPatients);
+                sysAdmin.displayPatients(patients, numPatients);
                 break;
             case 7:
-                sysAd.addMedicine(medicines, numMedicines);
+                sysAdmin.addMedicine(medicines, numMedicines);
                 break;
             case 8: {
                 string name;
                 cout << "Enter medicine name to search: ";
                 cin.ignore();
                 getline(cin, name);
-                int index = sysAd.searchMedicine(medicines, numMedicines, name);
+                int index = sysAdmin.searchMedicine(medicines, numMedicines, name);
                 if (index != -1) {
                     cout << "\nMedicine Details:\n";
                     cout << "  Name: " << medicines[index].getName() << endl;
@@ -144,13 +152,13 @@ int main() {
                 break;
             }
             case 9:
-                sysAd.updateMedicine(medicines, numMedicines);
+                sysAdmin.updateMedicine(medicines, numMedicines);
                 break;
             case 10:
-                sysAd.deleteMedicine(medicines, numMedicines);
+                sysAdmin.deleteMedicine(medicines, numMedicines);
                 break;
             case 11:
-                sysAd.displayMedicines(medicines, numMedicines);
+                sysAdmin.displayMedicines(medicines, numMedicines);
                 break;
             case 12:
                 // Write data to file before exiting
@@ -164,7 +172,7 @@ int main() {
 
     // Generate report at program exit
     time_t currentTime = time(0);
-    sysAd.generateReport(numPatients, numMedicines, currentTime);
+    sysAdmin.generateReport(numPatients, numMedicines, currentTime);
 
     return 0;
 }

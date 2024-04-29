@@ -2,7 +2,6 @@
 // Created by Chanvitha on 4/29/2024.
 //
 
-#include <iostream>
 #include <string>
 
 #include "Medicine.h"
